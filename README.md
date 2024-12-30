@@ -20,8 +20,8 @@ Triksha is a comprehensive platform for testing and enhancing the security of La
 - 🎯 **Contextual Analysis**: Deep dive into model behavior patterns
 - 📊 **Detailed Results**: In-depth analysis and vulnerability reporting
 - 🔄 **Custom Testing**: Create and manage your own security test suites
-- 📈 **Fine-tuning**: Enhance model security through targeted training
-- 📆 **Scheduled Scans**: Automated security monitoring
+- 📈 **Fine-tuning**: Enhance model security through targeted training ( coming soon )
+- 📆 **Scheduled Scans**: Automated security monitoring ( coming soon )
 
 ## 🛠️ Tech Stack
 
