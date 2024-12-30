@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/uploads/1b4300b9-bc60-4940-92c6-406befe6fd18.png" alt="Triksha Interface" width="800"/>
+  <img src="public/lovable-uploads/1b4300b9-bc60-4940-92c6-406befe6fd18.png" alt="Triksha Interface" width="800"/>
 
   # Triksha - LLM Security Testing Platform
 
