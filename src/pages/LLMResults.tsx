@@ -5,7 +5,7 @@ import { Shield } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import PageHeader from "@/components/PageHeader";
 import { ResultsContainer } from "@/components/llm-results/ResultsContainer";
-import { LLMScan, GeraideScan } from "@/components/llm-results/types";
+import { LLMScan, GeraideScan, Message } from "@/components/llm-results/types";
 
 const LLMResults = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -23,37 +23,68 @@ const LLMResults = () => {
   const { data: scans, isLoading: isScansLoading, error: scansError } = useQuery({
     queryKey: ['llm-scans'],
     queryFn: async () => {
+      console.log('Fetching LLM scans...');
       const { data, error } = await supabase
         .from('llm_scans')
         .select('*')
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Error fetching LLM scans:', error);
+        throw error;
+      }
+      console.log('LLM scans data:', data);
       return data as LLMScan[];
     },
   });
 
-  // Query for Geraide scans
+  // Query for contextual scans with proper type handling
   const { data: geraidScans, isLoading: isGeraideLoading, error: geraideError } = useQuery({
-    queryKey: ['geraide-scans'],
+    queryKey: ['contextual-scans'],
     queryFn: async () => {
+      console.log('Fetching contextual scans...');
       const { data, error } = await supabase
         .from('contextual_scans')
         .select('*')
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Error fetching contextual scans:', error);
+        throw error;
+      }
 
-      return (data || []).map(scan => ({
-        ...scan,
-        messages: (scan.messages as any[]).map((msg: any) => ({
-          role: msg.role,
-          content: msg.content
-        }))
-      })) as GeraideScan[];
+      console.log('Raw contextual scans data:', data);
+
+      // Transform the data to match the GeraideScan type
+      const transformedData = (data || []).map(scan => {
+        // Ensure messages are properly typed
+        const messages = Array.isArray(scan.messages) 
+          ? scan.messages.map((msg: any) => ({
+              role: msg.role as Message['role'],
+              content: String(msg.content)
+            }))
+          : [];
+
+        return {
+          id: scan.id,
+          user_id: scan.user_id,
+          provider: scan.provider,
+          model: scan.model,
+          messages,
+          is_vulnerable: scan.is_vulnerable,
+          fingerprint_results: scan.fingerprint_results,
+          dataset_analysis_results: scan.dataset_analysis_results,
+          created_at: scan.created_at,
+          updated_at: scan.updated_at
+        } as GeraideScan;
+      });
+
+      console.log('Transformed contextual scans:', transformedData);
+      return transformedData;
     },
   });
 
+  // Filter regular scans
   const filteredScans = scans?.filter(scan => {
     const matchesSearch = searchQuery === "" || 
       (scan.results?.prompt?.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -68,6 +99,7 @@ const LLMResults = () => {
            matchesVulnerability && matchesModel;
   });
 
+  // Filter contextual scans
   const filteredContextualScans = geraidScans?.filter(scan => {
     const matchesSearch = contextSearchQuery === "" || 
       scan.messages.some(msg => 
@@ -81,48 +113,52 @@ const LLMResults = () => {
   });
 
   return (
-    <div className="container py-4 md:py-8">
-      <PageHeader
-        icon={Shield}
-        title="Scan Results"
-        description="View and analyze the results of your LLM security scans. Track vulnerabilities and monitor model behavior."
-      />
-      
-      <Card className="w-full mx-auto border border-border/50 shadow-lg">
-        <ResultsContainer
-          scans={scans}
-          geraidScans={geraidScans}
-          isScansLoading={isScansLoading}
-          isGeraideLoading={isGeraideLoading}
-          scansError={scansError as Error | null}
-          geraideError={geraideError as Error | null}
-          filteredScans={filteredScans}
-          filteredContextualScans={filteredContextualScans}
-          searchProps={{
-            searchQuery,
-            setSearchQuery,
-            selectedCategory,
-            setSelectedCategory,
-            selectedScanType,
-            setSelectedScanType,
-            vulnerabilityStatus,
-            setVulnerabilityStatus,
-            selectedModel,
-            setSelectedModel,
-          }}
-          contextualProps={{
-            contextSearchQuery,
-            setContextSearchQuery,
-            contextModel,
-            setContextModel,
-            contextVulnerabilityStatus,
-            setContextVulnerabilityStatus,
-          }}
+    <div className="min-h-screen bg-background">
+      <div className="container py-8 space-y-8">
+        <PageHeader
+          icon={Shield}
+          title="Scan Results"
+          description="View and analyze the results of your LLM security scans. Track vulnerabilities and monitor model behavior."
         />
-      </Card>
+        
+        <Card className="w-full border border-border/50 shadow-md overflow-hidden">
+          <div className="p-6">
+            <ResultsContainer
+              scans={scans}
+              geraidScans={geraidScans}
+              isScansLoading={isScansLoading}
+              isGeraideLoading={isGeraideLoading}
+              scansError={scansError as Error | null}
+              geraideError={geraideError as Error | null}
+              filteredScans={filteredScans}
+              filteredContextualScans={filteredContextualScans}
+              searchProps={{
+                searchQuery,
+                setSearchQuery,
+                selectedCategory,
+                setSelectedCategory,
+                selectedScanType,
+                setSelectedScanType,
+                vulnerabilityStatus,
+                setVulnerabilityStatus,
+                selectedModel,
+                setSelectedModel,
+              }}
+              contextualProps={{
+                contextSearchQuery,
+                setContextSearchQuery,
+                contextModel,
+                setContextModel,
+                contextVulnerabilityStatus,
+                setContextVulnerabilityStatus,
+              }}
+            />
+          </div>
+        </Card>
+      </div>
 
       {/* Background Pattern */}
-      <div className="fixed inset-0 -z-10 h-full w-full bg-[radial-gradient(#1c1c1c_1px,transparent_1px)] [background-size:16px_16px] opacity-25" />
+      <div className="fixed inset-0 -z-10 h-full w-full bg-dot-pattern opacity-25" />
     </div>
   );
 };
