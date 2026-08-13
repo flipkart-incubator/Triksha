@@ -30,7 +30,7 @@ Triksha red-teams your AI system the way an actual attacker would — by underst
 
 AI systems are being deployed faster than they are being secured. Most organizations treat LLM safety as a model-level property — something the foundation model vendor handles — and deploy AI assistants, autonomous agents, and tool-calling systems with little understanding of how they behave under adversarial pressure specific to their use case.
 
-<img src="docs/images/co-pilot-hero.png" alt="Triksha Copilot" width="600" />
+<img src="docs/images/co-pilot-hero.png" alt="Triksha Copilot" width="1000" />
 
 Existing red-teaming tools reflect this gap. They throw generic harmful content at a model and check if it refuses, measuring baseline safety training, not deployment security. In a benchmark across five tools — Triksha, Garak, Promptfoo, Giskard, and PyRIT — against the same hardened banking chatbot (Gemini 2.5 Flash), Triksha achieved the highest confirmed bypass rate, approximately 90% higher than the next closest tool (PyRIT, Promptfoo), with every finding mapping to a real, exploitable business-logic vulnerability verified by an LLM judge. Triksha was the only tool whose attack suite was contextually generated from the target's declared use case rather than pulled from generic datasets. Triksha surfaced vulnerabilities the others missed: internal fraud detection algorithm disclosure, MFA monitoring system enumeration, multi-turn boundary erosion, and HTML comment injection attack patterns that an adversary targeting a financial AI assistant would actually exploit.
 
