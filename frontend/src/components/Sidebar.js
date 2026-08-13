@@ -12,13 +12,14 @@ import CopilotConversationList from './copilot/CopilotConversationList';
 
 const LS_COLLAPSED = 'triksha_sidebar_collapsed';
 
-function BrandLogo({ className = 'h-9 w-auto max-w-[11.5rem]' }) {
+function BrandLogo() {
   return (
-    <img
-      src={`${process.env.PUBLIC_URL}/triksha-logo.png`}
-      alt="Triksha"
-      className={`${className} flex-shrink-0 object-contain`}
-    />
+    <div className="flex-shrink-0 leading-tight text-left">
+      <div className="text-xl font-bold text-primary-600 dark:text-primary-400">Triksha</div>
+      <div className="text-[11px] font-medium text-black dark:text-white tracking-wide">
+        AI Security Platform
+      </div>
+    </div>
   );
 }
 

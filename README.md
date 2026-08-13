@@ -30,6 +30,8 @@ Triksha red-teams your AI system the way an actual attacker would — by underst
 
 AI systems are being deployed faster than they are being secured. Most organizations treat LLM safety as a model-level property — something the foundation model vendor handles — and deploy AI assistants, autonomous agents, and tool-calling systems with little understanding of how they behave under adversarial pressure specific to their use case.
 
+<img src="docs/images/co-pilot-hero.png" alt="Triksha Copilot" width="600" />
+
 Existing red-teaming tools reflect this gap. They throw generic harmful content at a model and check if it refuses, measuring baseline safety training, not deployment security. In a benchmark across five tools — Triksha, Garak, Promptfoo, Giskard, and PyRIT — against the same hardened banking chatbot (Gemini 2.5 Flash), Triksha achieved the highest confirmed bypass rate, approximately 90% higher than the next closest tool (PyRIT, Promptfoo), with every finding mapping to a real, exploitable business-logic vulnerability verified by an LLM judge. Triksha was the only tool whose attack suite was contextually generated from the target's declared use case rather than pulled from generic datasets. Triksha surfaced vulnerabilities the others missed: internal fraud detection algorithm disclosure, MFA monitoring system enumeration, multi-turn boundary erosion, and HTML comment injection attack patterns that an adversary targeting a financial AI assistant would actually exploit.
 
 Triksha is an open-source AI security platform that red-teams AI systems the way a real attacker would: by understanding what the system is supposed to do, then generating attacks specific to that context.
@@ -97,10 +99,12 @@ Harden agent skill definitions (`SKILL.md` and related files) before they ship t
 ### Docker (recommended)
 
 ```bash
-git clone https://github.com/your-org/triksha.git
-cd triksha
+git clone https://github.com/flipkart-incubator/Triksha.git
+cd Triksha
 docker compose -f docker-compose.os.yml up -d --build
 ```
+
+First build takes a few minutes (image pulls + dependency install). Ports `8000`, `8080`, `9092`, and `5432` must be free — stop any existing Triksha stack first (`docker compose -f docker-compose.os.yml down`) if you hit a `port is already allocated` error.
 
 Open **http://localhost:8080** → complete the setup wizard (2 minutes: pick LLM provider, paste API key, create admin account) → start scanning.
 
@@ -110,8 +114,8 @@ Open **http://localhost:8080** → complete the setup wizard (2 minutes: pick LL
 
 ```bash
 # Clone
-git clone https://github.com/your-org/triksha.git
-cd triksha
+git clone https://github.com/flipkart-incubator/Triksha.git
+cd Triksha
 
 # Backend (Terminal 1)
 cd api

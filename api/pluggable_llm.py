@@ -95,8 +95,9 @@ class PluggableLlm(BaseLlm):
                 else si.model_dump(exclude_none=True, by_alias=True)
             )
         if cfg and cfg.tools:
-            payload["tools"] = [t.model_dump(exclude_none=True, by_alias=True)
-                                if isinstance(t, types.Tool) else t for t in cfg.tools]
+            tools = [t.model_dump(exclude_none=True, by_alias=True)
+                    if isinstance(t, types.Tool) else t for t in cfg.tools]
+            payload["tools"] = [self._normalize_tool(t) for t in tools]
         if cfg and cfg.tool_config:
             tc = cfg.tool_config
             payload["toolConfig"] = (tc.model_dump(exclude_none=True, by_alias=True)
@@ -112,6 +113,22 @@ class PluggableLlm(BaseLlm):
         if resp.status_code != 200:
             raise Exception(f"Gemini HTTP {resp.status_code}: {resp.text[:300]}")
         return self._parse_gemini(resp.json())
+
+    @staticmethod
+    def _normalize_tool(tool: dict) -> dict:
+        """The google-adk/google-genai SDKs may emit function declarations using
+        the newer `parametersJsonSchema` key (JSON_SCHEMA_FOR_FUNC_DECL feature).
+        The `v1` REST generateContent endpoint only accepts the OpenAPI-schema
+        `parameters` key, so rename it back before sending."""
+        fdecls = tool.get("functionDeclarations") or tool.get("function_declarations")
+        if not fdecls:
+            return tool
+        for fd in fdecls:
+            if "parametersJsonSchema" in fd:
+                fd["parameters"] = fd.pop("parametersJsonSchema")
+            if "parameters_json_schema" in fd:
+                fd["parameters"] = fd.pop("parameters_json_schema")
+        return tool
 
     @staticmethod
     def _parse_gemini(data: dict) -> Optional[types.Content]:
@@ -142,7 +159,7 @@ class PluggableLlm(BaseLlm):
         for tool in (cfg.tools if cfg and cfg.tools else []):
             t = tool.model_dump(exclude_none=True, by_alias=True) if isinstance(tool, types.Tool) else tool
             for fd in t.get("functionDeclarations", []) or t.get("function_declarations", []):
-                decls.append(fd)
+                decls.append(PluggableLlm._normalize_tool({"functionDeclarations": [fd]})["functionDeclarations"][0])
         return decls
 
     @staticmethod
