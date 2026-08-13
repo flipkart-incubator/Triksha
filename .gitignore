@@ -1,0 +1,121 @@
+# ============================================
+# Python
+# ============================================
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+.npm
+
+# Environment files — all variants
+.env
+.env.*
+.env.local
+.env.*.local
+*.env
+.env.template
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+api/*.db-shm
+api/*.db-wal
+
+# Logs
+*.log
+logs/
+finetuning.log
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Docker
+.dockerignore
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Coverage and testing
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# Generated files
+exports/
+api/data/datasets/generated/
+
+# GCP credentials / WIF config / OAuth tokens (NEVER commit)
+gcp-wif-config.json
+**/gcp-wif-config.json
+*-sa-key.json
+**/service-account*.json
+*-oauth-token.json
+**/client_secret*.json
+
+# Astral S2S API — local reference only (never commit)
+docs/astral-s2s-credentials.local.json
+
+# Environment templates
+.env.template
+
+# Local scan data exports
+*.csv
+ehc-scan.csv
+testcases.csv
+
+# Screenshots and local media
+*.png
+*.jpg
+*.jpeg
+!docs/images/*.png
+!frontend/public/triksha-logo.png
+
+# Generated security review outputs
+api/data/security_reviews/*.docx
+
+# MCP config — contains credentials, use .mcp.json.example as template
+.mcp.json
+
+# Benchmark — run locally, not committed
+benchmark/
+
+# nohup output
+nohup.out
+.claude
+.cursor
+.flow
