@@ -14,7 +14,7 @@
 
 **Context-aware red teaming for AI models, agents, and MCP servers.**
 
-[![License: ELv2](https://img.shields.io/badge/License-ELv2-blue.svg)](https://www.elastic.co/licensing/elastic-license)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![Node 18+](https://img.shields.io/badge/node-18+-green.svg)](https://nodejs.org/)
 [![Docker](https://img.shields.io/badge/docker-required-blue.svg)](https://docs.docker.com/get-docker/)
@@ -87,7 +87,7 @@ Upload a sample of your training data. Triksha's ML detector identifies poisoned
 ### System Prompt Hardening
 Paste any system prompt and Triksha returns a hardened version with security addenda that close jailbreak, injection, and leakage vectors its scan engine would otherwise exploit. Submit jobs from the **Prompt Hardener** UI (`/harden`) or the API; track progress live and download the hardened prompt when complete.
 
-### Agent Skill Hardening
+### Agent Skill Hardening — Coming Soon (30th August)
 Harden agent skill definitions (`SKILL.md` and related files) before they ship to coding agents. Upload a skill file or point at a GitHub repo — Triksha appends a tailored **Security Guidelines** section grounded in OWASP and LLM/agent security guidance, specific to that skill's tools, inputs, and external systems. Optional PR flow for repo-based jobs. Available at `/skills-harden`.
 
 ---
@@ -219,4 +219,4 @@ Configure in **Settings → Connectors** after setup:
 
 ## License
 
-Elastic License 2.0 (ELv2) — free to use, modify, and self-host. Cannot be offered as a managed/hosted service. See [LICENSE](LICENSE).
+MIT License — free to use, modify, self-host, and offer as a service. See [LICENSE](LICENSE).
