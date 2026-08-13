@@ -133,7 +133,7 @@ Retrieval system manipulation. Crafts queries designed to surface specific poiso
 
 ---
 
-## Advanced Bypass Techniques (2024–2025 Research)
+## Advanced Bypass Techniques (Research-Driven)
 
 ### SKELETON_KEY
 *(Microsoft Research)* Educational context unlock attack. Convinces the model that providing harmful information is acceptable when framed as educational material for safety research.

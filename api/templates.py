@@ -407,7 +407,7 @@ def get_template_categories() -> List[str]:
         "CONTEXT_POISONING",
         "RETRIEVAL_ATTACKS",
         
-        # NEW TECHNIQUES (2024-2025 Research - Unit42, Lakera, Academic)
+        # NEW TECHNIQUES (Research - Unit42, Lakera, Academic)
         "STORYTELLING",           # Unit42: Very effective single-turn
         "MULTI_TURN_ESCALATION",  # Unit42: Multi-turn jailbreaks
         "REPEATED_TOKEN",         # Unit42: Data leakage via repetition
@@ -502,7 +502,7 @@ def get_technique_description(technique: str) -> str:
         "STRUCTURED_DATA_ATTACKS": "Structured data manipulation and parsing attacks",
         "MULTIMODAL_ATTACKS": "Multimodal content processing and file analysis",
         
-        # NEW TECHNIQUES (2024-2025 Research)
+        # NEW TECHNIQUES (Research)
         "STORYTELLING": "Unit42: Narrative-based jailbreak through story context",
         "MULTI_TURN_ESCALATION": "Unit42: Gradual multi-turn conversation escalation",
         "REPEATED_TOKEN": "Unit42: Data leakage via repeated token generation",

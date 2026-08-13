@@ -49,7 +49,7 @@ Point Triksha at any model (Gemini, OpenAI, Anthropic, or a custom REST endpoint
 - PII extraction and data exfiltration
 - Behavioral profiling and authority manipulation
 - RAG poisoning and retrieval manipulation
-- 2024–2025 research techniques (Skeleton Key, Best-of-N, Cipher attacks, ASCII art encoding)
+- Research-driven techniques (Skeleton Key, Best-of-N, Cipher attacks, ASCII art encoding)
 
 You get a bypass rate per technique, the exact payloads that succeeded, and a hardened system prompt to close the gaps.
 
