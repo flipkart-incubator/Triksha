@@ -35,7 +35,7 @@ import llm_providers
 logger = logging.getLogger(__name__)
 
 _REQUEST_TIMEOUT = 120
-_GEMINI_BASE = "https://generativelanguage.googleapis.com/v1"
+_GEMINI_BASE = "https://generativelanguage.googleapis.com/v1beta"
 
 
 class PluggableLlm(BaseLlm):

@@ -35,7 +35,7 @@ import connectors_store
 logger = logging.getLogger(__name__)
 router = APIRouter()
 
-_API_BASE = os.getenv("INTERNAL_API_BASE", "http://localhost:8001")
+_API_BASE = os.getenv("INTERNAL_API_BASE", "http://localhost:8000")
 _SESSION_COOKIE = "triksha_session"
 
 # Per-request auth cookie, read by tools (lets us keep one global agent/runner).

@@ -190,7 +190,7 @@ _OPENAPI_TAGS = [
             "(tool discovery + adversarial attacks), and returns results via the polling or SSE endpoints.\n\n"
             "**Quick start:**\n"
             "```bash\n"
-            "curl -X POST https://localhost:8001/triksha/agent-scan \\\n"
+            "curl -X POST http://localhost:8000/triksha/agent-scan \\\n"
             "  -H 'Authorization: Bearer <triksha-token>' \\\n"
             "  -H 'Content-Type: application/json' \\\n"
             "  -d '{\n"
