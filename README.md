@@ -14,7 +14,7 @@
 
 **Context-aware red teaming for AI models, agents, and MCP servers.**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![Node 18+](https://img.shields.io/badge/node-18+-green.svg)](https://nodejs.org/)
 [![Docker](https://img.shields.io/badge/docker-required-blue.svg)](https://docs.docker.com/get-docker/)
@@ -223,4 +223,4 @@ Configure in **Settings → Connectors** after setup:
 
 ## License
 
-MIT License — free to use, modify, self-host, and offer as a service. See [LICENSE](LICENSE).
+Apache License 2.0 — free to use, modify, self-host, and offer as a service, with an express patent grant. See [LICENSE](LICENSE).
